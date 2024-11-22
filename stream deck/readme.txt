@@ -1,0 +1,1 @@
+This script calculates the average download and upload speed as well as the most used server from the results of the BarRaider's speedtest plugin for the streamdeck.
