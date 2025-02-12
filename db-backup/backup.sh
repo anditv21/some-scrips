@@ -11,8 +11,17 @@ BACKUP_PATH="/var/db-backups"
 # Date format for file name
 DATE=$(date +"%Y-%m-%d_%H-%M-%S")
 
-# Run mysqldump
-mysqldump -u $USER -p$PASSWORD $DATABASE > "$BACKUP_PATH/${DATABASE}_backup_$DATE.sql"
+mkdir -p "$BACKUP_PATH"
 
-# Optional: Remove backups older than 7 days
-find $BACKUP_PATH -type f -name "*.sql" -mtime +7 -exec rm {} \;
+mysqldump --single-transaction --quick --lock-tables=false -u "$USER" -p"$PASSWORD" "$DATABASE" > "$BACKUP_PATH/${DATABASE}_backup_$DATE.sql"
+
+# Check if dump was successful
+if [ $? -eq 0 ]; then
+    echo "Backup successful: $BACKUP_PATH/${DATABASE}_backup_$DATE.sql"
+else
+    echo "Backup failed!" >&2
+    exit 1
+fi
+
+
+exit 0

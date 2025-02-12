@@ -1,3 +1,5 @@
+# Must be restarted every few hours. idk why
+
 import requests
 import time
 
