@@ -21,7 +21,7 @@ if response.status_code == 200:
 
     devices = data.get("devices", [])
     for device in devices:
-        if device.get("sku") == "H5075": # Change this to the SKU of your device
+        if device.get("sku") == "H5179": # Change this to the SKU of your device
             device_name = device.get("deviceName", "Unknown Device")
             device_ext = device.get("deviceExt", {})
             last_device_data = device_ext.get("lastDeviceData", "{}")
